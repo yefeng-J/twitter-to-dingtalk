@@ -5,6 +5,9 @@ on:
     - cron: '*/15 * * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   forward:
     runs-on: ubuntu-latest
@@ -24,3 +27,10 @@ jobs:
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
           KEYWORD: ${{ secrets.KEYWORD }}
         run: python forward.py
+
+      - name: Save state
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add last_run.txt
+          git diff --staged --quiet || (git commit -m "update state" && git push)

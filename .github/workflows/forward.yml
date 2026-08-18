@@ -1,4 +1,4 @@
-name: Twitter to DingTalk
+name: Telegram to DingTalk
 
 on:
   schedule:
@@ -21,9 +21,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Check RSS and forward
+      - name: Monitor group and forward
         env:
-          RSS_FEED_URL: ${{ secrets.RSS_FEED_URL }}
+          SESSION_STRING: ${{ secrets.SESSION_STRING }}
+          GROUP_ID: ${{ secrets.GROUP_ID }}
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
           KEYWORD: ${{ secrets.KEYWORD }}
         run: python forward.py

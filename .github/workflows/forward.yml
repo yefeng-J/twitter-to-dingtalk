@@ -1,8 +1,8 @@
 name: Telegram to DingTalk
 
 on:
-  schedule:
-    - cron: '*/15 * * * *'
+  # 已停用 GitHub 自带 cron（配额消耗大且延迟严重）
+  # 改由 cron-job.org 每 15 分钟触发 workflow_dispatch
   workflow_dispatch:
 
 permissions:

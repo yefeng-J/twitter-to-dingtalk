@@ -1,9 +1,11 @@
 name: Telegram to DingTalk
 
 on:
-  # 已停用 GitHub 自带 cron（配额消耗大且延迟严重）
-  # 改由 cron-job.org 每 15 分钟触发 workflow_dispatch
+  # 主触发源：cron-job.org 每 15 分钟调用 workflow_dispatch
   workflow_dispatch:
+  # 兜底触发源：GitHub 自带 cron（低频、避开整点，防 cron-job.org 失效导致完全断链）
+  schedule:
+    - cron: '37 */2 * * *'
 
 permissions:
   contents: write
